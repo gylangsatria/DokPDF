@@ -32,7 +32,11 @@ const translations = {
         'err-min-files': 'Pilih minimal 2 file',
         'err-no-file': 'Pilih file terlebih dahulu',
         'success-process': 'Proses berhasil',
-        'success-merge': 'PDF berhasil digabungkan'
+        'success-merge': 'PDF berhasil digabungkan',
+        'info-about-title': 'Tentang DokPDF',
+        'info-about-desc': 'DokPDF adalah solusi sederhana untuk mengolah dokumen PDF Anda secara langsung di browser atau melalui server lokal yang aman. Cepat, gratis, dan tanpa ribet.',
+        'info-privacy-title': 'Privasi & Keamanan',
+        'info-privacy-desc': 'Kami menghargai privasi Anda. Semua file yang diunggah akan diproses dan segera dihapus setelah selesai. Kami tidak menyimpan atau melihat konten dokumen Anda.'
     },
     en: {
         'hero-title': 'What would you like to do with PDF?',
@@ -65,7 +69,11 @@ const translations = {
         'err-min-files': 'Select at least 2 files',
         'err-no-file': 'Please select a file first',
         'success-process': 'Success',
-        'success-merge': 'PDF merged successfully'
+        'success-merge': 'PDF merged successfully',
+        'info-about-title': 'About DokPDF',
+        'info-about-desc': 'DokPDF is a simple solution for processing your PDF documents directly in your browser or through a secure local server. Fast, free, and hassle-free.',
+        'info-privacy-title': 'Privacy & Security',
+        'info-privacy-desc': 'We value your privacy. All uploaded files are processed and immediately deleted once finished. We do not store or view your document content.'
     }
 };
 
