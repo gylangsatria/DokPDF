@@ -1,0 +1,39 @@
+# Dockerfile.api
+FROM python:3.9-slim
+
+LABEL maintainer="DokPDF Team"
+LABEL version="1.0.0"
+LABEL description="DokPDF API - Kelola PDF Jadi Mudah"
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    poppler-utils \
+    libpoppler-dev \
+    libreoffice \
+    libreoffice-writer \
+    libreoffice-impress \
+    libreoffice-calc \
+    ghostscript \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY api/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY api/ .
+
+# Create uploads directory
+RUN mkdir -p uploads/temp
+
+# Create non-root user
+RUN useradd -m -u 1000 dokpdf && chown -R dokpdf:dokpdf /app
+USER dokpdf
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]

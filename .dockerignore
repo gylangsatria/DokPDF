@@ -1,0 +1,15 @@
+# .dockerignore
+.git
+.gitignore
+README.md
+*.md
+*.log
+.DS_Store
+.vscode
+.idea
+.env.local
+*.tmp
+*.temp
+node_modules
+uploads/temp/*
+!uploads/temp/.gitkeep

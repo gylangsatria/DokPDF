@@ -1,0 +1,50 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  dokpdf-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dokpdf-frontend
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    volumes:
+      - ./static:/usr/share/nginx/html/static:ro
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+    depends_on:
+      - dokpdf-api
+    networks:
+      - dokpdf-network
+    labels:
+      - "dokpdf.service=frontend"
+      - "dokpdf.version=1.0.0"
+
+  dokpdf-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: dokpdf-api
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    volumes:
+      - ./uploads:/app/uploads
+      - ./api:/app
+    environment:
+      - FLASK_ENV=production
+      - MAX_FILE_SIZE=52428800
+      - TZ=Asia/Jakarta
+      - SECRET_KEY=dokpdf-secret-key-change-in-production
+      - APP_NAME=DokPDF
+    networks:
+      - dokpdf-network
+    labels:
+      - "dokpdf.service=api"
+      - "dokpdf.version=1.0.0"
+
+networks:
+  dokpdf-network:
+    driver: bridge
+    name: dokpdf-network
