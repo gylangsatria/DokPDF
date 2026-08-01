@@ -4,7 +4,6 @@ FROM nginx:alpine
 # Copy application files
 COPY index.html /usr/share/nginx/html/
 COPY static/ /usr/share/nginx/html/static/
-COPY favicon.ico /usr/share/nginx/html/
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf

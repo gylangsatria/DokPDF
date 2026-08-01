@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DokPDF - Kelola PDF Jadi Mudah</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">DokPDF</div>
+        <div>Free PDF Tools Online</div>
+    </nav>
+
+    <div class="container">
+        <h1 style="text-align: center;">Apa yang ingin Anda lakukan dengan PDF?</h1>
+        
+        <div class="grid">
+            <div class="tool-card" onclick="openModal('modal-merge')">
+                <i class="fas fa-object-group"></i>
+                <h3>Gabungkan PDF</h3>
+                <p>Gabungkan beberapa PDF menjadi satu</p>
+            </div>
+            <div class="tool-card" onclick="openModal('modal-split')">
+                <i class="fas fa-scissors"></i>
+                <h3>Pisahkan PDF</h3>
+                <p>Ambil halaman tertentu dari PDF</p>
+            </div>
+            <div class="tool-card" onclick="openModal('modal-compress')">
+                <i class="fas fa-file-contract"></i>
+                <h3>Kompres PDF</h3>
+                <p>Kecilkan ukuran file PDF</p>
+            </div>
+            <div class="tool-card" onclick="openModal('modal-word')">
+                <i class="fas fa-file-word"></i>
+                <h3>PDF ke Word</h3>
+                <p>Konversi PDF ke dokumen Word</p>
+            </div>
+            <div class="tool-card" onclick="openModal('modal-excel')">
+                <i class="fas fa-file-excel"></i>
+                <h3>PDF ke Excel</h3>
+                <p>Konversi PDF ke spreadsheet Excel</p>
+            </div>
+            <div class="tool-card" onclick="openModal('modal-images')">
+                <i class="fas fa-file-image"></i>
+                <h3>PDF ke Gambar</h3>
+                <p>Ubah halaman PDF jadi gambar</p>
+            </div>
+            <div class="tool-card" onclick="openModal('modal-lock')">
+                <i class="fas fa-lock"></i>
+                <h3>Kunci PDF</h3>
+                <p>Proteksi PDF dengan password</p>
+            </div>
+            <div class="tool-card" onclick="openModal('modal-watermark')">
+                <i class="fas fa-stamp"></i>
+                <h3>Watermark</h3>
+                <p>Tambahkan teks watermark</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-merge" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-merge')">&times;</span>
+            <h2>Gabungkan PDF</h2>
+            <div id="merge-dynamic-list">
+                <div class="merge-file-item"><input type="file" accept=".pdf"></div>
+                <div class="merge-file-item"><input type="file" accept=".pdf"></div>
+            </div>
+            <button type="button" onclick="addMergeInput()" style="background:#666; margin-bottom:1rem">Tambah File</button>
+            <button onclick="doMerge()">Gabungkan Sekarang</button>
+        </div>
+    </div>
+
+    <div id="modal-split" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-split')">&times;</span>
+            <h2>Pisahkan PDF</h2>
+            <input type="file" id="split-file" accept=".pdf">
+            <input type="text" id="split-pages" placeholder="Contoh: 1, 3, 5-10">
+            <button onclick="doGeneric('/split', 'split-file', 'split.pdf', {pages: document.getElementById('split-pages').value})">Pisahkan</button>
+        </div>
+    </div>
+
+    <div id="modal-compress" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-compress')">&times;</span>
+            <h2>Kompres PDF</h2>
+            <input type="file" id="compress-file" accept=".pdf">
+            <button onclick="doGeneric('/compress', 'compress-file', 'compressed.pdf')">Kompres</button>
+        </div>
+    </div>
+
+    <div id="modal-word" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-word')">&times;</span>
+            <h2>Konversi ke Word</h2>
+            <input type="file" id="word-file" accept=".pdf">
+            <button onclick="doGeneric('/pdf-to-word', 'word-file', 'document.docx')">Konversi</button>
+        </div>
+    </div>
+
+    <div id="modal-excel" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-excel')">&times;</span>
+            <h2>Konversi ke Excel</h2>
+            <input type="file" id="excel-file" accept=".pdf">
+            <button onclick="doGeneric('/pdf-to-excel', 'excel-file', 'spreadsheet.xlsx')">Konversi</button>
+        </div>
+    </div>
+
+    <div id="modal-images" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-images')">&times;</span>
+            <h2>PDF ke Gambar</h2>
+            <input type="file" id="images-file" accept=".pdf">
+            <select id="image-format">
+                <option value="png">PNG</option>
+                <option value="jpg">JPG</option>
+            </select>
+            <button onclick="doGeneric('/pdf-to-images', 'images-file', 'images.zip', {format: document.getElementById('image-format').value})">Ubah ke Gambar</button>
+        </div>
+    </div>
+
+    <div id="modal-lock" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-lock')">&times;</span>
+            <h2>Kunci PDF</h2>
+            <input type="file" id="lock-file" accept=".pdf">
+            <input type="password" id="lock-pass" placeholder="Password minimal 8 karakter">
+            <button onclick="doGeneric('/lock-pdf', 'lock-file', 'locked.pdf', {password: document.getElementById('lock-pass').value})">Kunci</button>
+        </div>
+    </div>
+
+    <div id="modal-watermark" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-watermark')">&times;</span>
+            <h2>Tambah Watermark</h2>
+            <input type="file" id="wm-file" accept=".pdf">
+            <input type="text" id="wm-text" placeholder="Teks Watermark">
+            <button onclick="doGeneric('/add-watermark', 'wm-file', 'watermarked.pdf', {text: document.getElementById('wm-text').value})">Proses</button>
+        </div>
+    </div>
+
+    <div id="loadingOverlay">
+        <div class="spinner"></div>
+        <p id="loading-text">Memproses...</p>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>

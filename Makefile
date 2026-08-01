@@ -30,10 +30,10 @@ up:
 	@echo "${GREEN}Starting DokPDF containers...${RESET}"
 	docker-compose up -d
 	@echo ""
-	@echo "${GREEN}✅ DokPDF is running!${RESET}"
-	@echo "${YELLOW}📱 Frontend: http://localhost:8080${RESET}"
-	@echo "${YELLOW}🔧 API: http://localhost:5000${RESET}"
-	@echo "${YELLOW}📊 Logs: make logs${RESET}"
+	@echo "${GREEN}DokPDF is running!${RESET}"
+	@echo "${YELLOW}Frontend: http://localhost:8080${RESET}"
+	@echo "${YELLOW}API: http://localhost:5000${RESET}"
+	@echo "${YELLOW}Logs: make logs${RESET}"
 
 down:
 	@echo "${YELLOW}Stopping DokPDF containers...${RESET}"
@@ -58,7 +58,7 @@ test:
 	@echo "${YELLOW}Testing DokPDF API...${RESET}"
 	@curl -s http://localhost:5000/api/health | python -m json.tool || echo "${RED}API not responding${RESET}"
 	@echo ""
-	@echo "${GREEN}✅ API is healthy${RESET}"
+	@echo "${GREEN}API is healthy${RESET}"
 
 install:
 	@echo "${YELLOW}Installing Python dependencies...${RESET}"

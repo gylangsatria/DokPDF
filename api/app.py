@@ -511,9 +511,9 @@ def add_signature():
 
 if __name__ == '__main__':
     print("=" * 50)
-    print("📄 DokPDF - Kelola PDF Jadi Mudah")
+    print("DokPDF - Kelola PDF Jadi Mudah")
     print("=" * 50)
-    print(f"🚀 API Server running on http://0.0.0.0:5000")
-    print(f"📁 Upload folder: {app.config['UPLOAD_FOLDER']}")
+    print(f"API Server running on http://0.0.0.0:5000")
+    print(f"Upload folder: {app.config['UPLOAD_FOLDER']}")
     print("=" * 50)
     app.run(host='0.0.0.0', port=5000, debug=False)
