@@ -67,3 +67,7 @@ Akses:
 - `index.html`: Halaman utama.
 - `docker-compose.yml`: Konfigurasi orchestrasi container.
 - `nginx.conf`: Konfigurasi reverse proxy.
+
+## Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
