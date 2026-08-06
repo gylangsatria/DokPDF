@@ -28,8 +28,7 @@ services:
       - "5000:5000"
     restart: unless-stopped
     volumes:
-      - ./uploads:/app/uploads
-      - ./api:/app
+      - dokpdf-uploads:/app/uploads
     environment:
       - FLASK_ENV=production
       - MAX_FILE_SIZE=52428800
@@ -46,3 +45,6 @@ networks:
   dokpdf-network:
     driver: bridge
     name: dokpdf-network
+
+volumes:
+  dokpdf-uploads:

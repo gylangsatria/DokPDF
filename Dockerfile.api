@@ -27,11 +27,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY api/ .
 
-# Create uploads directory
-RUN mkdir -p uploads/temp
-
 # Create non-root user
-RUN useradd -m -u 1000 dokpdf && chown -R dokpdf:dokpdf /app
+RUN useradd -m -u 1000 dokpdf
+
+# Create uploads directory and set permissions
+RUN mkdir -p uploads/temp && chown -R dokpdf:dokpdf /app
 USER dokpdf
 
 EXPOSE 5000
